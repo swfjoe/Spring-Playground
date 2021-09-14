@@ -14,7 +14,7 @@ public class MathController {
     }
 
     @GetMapping("/calculate")
-    public String mathCalculate(@RequestParam(defaultValue = "sum") String operation,
+    public String getCalculation(@RequestParam(defaultValue = "sum") String operation,
                                 @RequestParam String x,
                                 @RequestParam String y) {
         return MathService.calculate(operation,x,y);
@@ -26,7 +26,19 @@ public class MathController {
     }
 
     @GetMapping("/volume/{x}/{y}/{z}")
-    public String getVolume(@PathVariable String x, @PathVariable String y, @PathVariable String z) {
+    public String getVolume(@PathVariable String x,
+                            @PathVariable String y,
+                            @PathVariable String z) {
         return MathService.calculateVolume(x, y, z);
+    }
+
+    @PostMapping("/area")
+    public String getArea(@RequestParam String type,
+                          @RequestParam(required = false, defaultValue = "") String radius,
+                          @RequestParam(required = false, defaultValue = "") String width,
+                          @RequestParam(required = false, defaultValue = "") String height) {
+        if (type.equals("circle") && radius.equals("")) return "Invalid";
+        else if(type.equals("rectangle")&&(width.equals("")||height.equals(""))) return "Invalid";
+        else return MathService.calculateArea(type, radius, width, height);
     }
 }

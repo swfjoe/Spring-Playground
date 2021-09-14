@@ -8,6 +8,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -85,5 +86,25 @@ public class MathControllerTest {
         this.mvc.perform(get("/math/volume/3/4/5").accept(MediaType.TEXT_PLAIN))
                 .andExpect(status().isOk())
                 .andExpect(content().string("The volume of a 3x4x5 rectangle is 60"));
+    }
+
+    @Test
+    void testGetAreaOfCircle() throws Exception{
+        this.mvc.perform(post("/math/area?type=circle&radius=5").accept(MediaType.TEXT_PLAIN))
+                .andExpect(status().isOk())
+                .andExpect(content().string("Area of a circle with a radius of 5 is 78.53982"));
+    }
+
+    @Test
+    void testGetAreaOfRectangle() throws Exception{
+        this.mvc.perform(post("/math/area?type=rectangle&width=5&height=5").accept(MediaType.TEXT_PLAIN))
+                .andExpect(status().isOk())
+                .andExpect(content().string("Area of a 5x5 rectangle is 25"));
+    }
+    @Test
+    void testInvalidRectangleAndRadius() throws Exception{
+        this.mvc.perform(post("/math/area?type=rectangle&radius=5").accept(MediaType.TEXT_PLAIN))
+                .andExpect(status().isOk())
+                .andExpect(content().string("Invalid"));
     }
 }

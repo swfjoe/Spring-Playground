@@ -33,7 +33,8 @@ public class MathService {
                 return String.format("Operation is: %s, x is: %s, y is: %s", operation, x, y);
         }
     }
-    public static String sum (List<String> n) {
+
+    public static String sum(List<String> n) {
         int sum = 0;
         StringBuilder sb = new StringBuilder();
 
@@ -46,8 +47,24 @@ public class MathService {
     }
 
     public static String calculateVolume(String x, String y, String z) {
-                int product;
-                product = parseInt(x) * parseInt(y) * parseInt(z);
-                return String.format("The volume of a %sx%sx%s rectangle is %s", x, y, z, product);
+        int product;
+        product = parseInt(x) * parseInt(y) * parseInt(z);
+        return String.format("The volume of a %sx%sx%s rectangle is %s", x, y, z, product);
+    }
+
+    public static String calculateArea(String type, String radius, String width, String height) {
+        float area;
+        switch (type) {
+            case "circle" : {
+                float r = parseInt(radius);
+                area = (float) Math.PI * r * r;
+                return String.format("Area of a circle with a radius of %s is %.5f", radius, area);
+            }
+            case "rectangle" : {
+                int total = parseInt(width)*parseInt(height);
+                return String.format("Area of a %sx%s rectangle is %s",width,height,total);
+            }
+        }
+    return "Invalid";
     }
 }
