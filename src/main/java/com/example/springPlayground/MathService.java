@@ -44,4 +44,10 @@ public class MathService {
         sb.delete(sb.lastIndexOf("+") - 1, sb.length()).append(" = ").append(sum);
         return sb.toString();
     }
+
+    public static String calculateVolume(String x, String y, String z) {
+                int product;
+                product = parseInt(x) * parseInt(y) * parseInt(z);
+                return String.format("The volume of a %sx%sx%s rectangle is %s", x, y, z, product);
+    }
 }

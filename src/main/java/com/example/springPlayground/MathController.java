@@ -1,9 +1,6 @@
 package com.example.springPlayground;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -26,5 +23,10 @@ public class MathController {
     @GetMapping("/sum")
     public String getSum(@RequestParam("n") List<String> n) {
         return MathService.sum(n);
+    }
+
+    @GetMapping("/volume/{x}/{y}/{z}")
+    public String getVolume(@PathVariable String x, @PathVariable String y, @PathVariable String z) {
+        return MathService.calculateVolume(x, y, z);
     }
 }

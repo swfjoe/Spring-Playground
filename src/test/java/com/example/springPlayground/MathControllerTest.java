@@ -79,4 +79,11 @@ public class MathControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(content().string("5 = 5"));
     }
+
+    @Test
+    void testVolumeCalculationFromPathVariables() throws Exception{
+        this.mvc.perform(get("/math/volume/3/4/5").accept(MediaType.TEXT_PLAIN))
+                .andExpect(status().isOk())
+                .andExpect(content().string("The volume of a 3x4x5 rectangle is 60"));
+    }
 }
