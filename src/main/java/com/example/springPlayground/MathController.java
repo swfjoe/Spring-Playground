@@ -10,13 +10,13 @@ public class MathController {
 
     @GetMapping("/pi")
     public String getPi(){
-        return "3.141592653589793";
+        return String.format("%1.15f", Math.PI);
     }
 
     @GetMapping("/calculate")
     public String getCalculation(@RequestParam(defaultValue = "sum") String operation,
-                                @RequestParam String x,
-                                @RequestParam String y) {
+                                 @RequestParam String x,
+                                 @RequestParam String y) {
         return MathService.calculate(operation,x,y);
     }
 
@@ -38,7 +38,7 @@ public class MathController {
                           @RequestParam(required = false, defaultValue = "") String width,
                           @RequestParam(required = false, defaultValue = "") String height) {
         if (type.equals("circle") && radius.equals("")) return "Invalid";
-        else if(type.equals("rectangle")&&(width.equals("")||height.equals(""))) return "Invalid";
+        else if(type.equals("rectangle") && (width.equals("") || height.equals(""))) return "Invalid";
         else return MathService.calculateArea(type, radius, width, height);
     }
 }

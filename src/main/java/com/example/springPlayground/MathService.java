@@ -6,7 +6,6 @@ import static java.lang.Integer.parseInt;
 
 public class MathService {
 
-
     public static String calculate(String operation, String x, String y) {
         switch (operation) {
             case "add": {
@@ -55,16 +54,16 @@ public class MathService {
     public static String calculateArea(String type, String radius, String width, String height) {
         float area;
         switch (type) {
-            case "circle" : {
+            case "circle" -> {
                 float r = parseInt(radius);
                 area = (float) Math.PI * r * r;
                 return String.format("Area of a circle with a radius of %s is %.5f", radius, area);
             }
-            case "rectangle" : {
-                int total = parseInt(width)*parseInt(height);
-                return String.format("Area of a %sx%s rectangle is %s",width,height,total);
+            case "rectangle" -> {
+                int total = parseInt(width) * parseInt(height);
+                return String.format("Area of a %sx%s rectangle is %s", width, height, total);
             }
         }
-    return "Invalid";
+        return "Invalid.";
     }
 }
